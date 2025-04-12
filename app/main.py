@@ -27,9 +27,12 @@ dalle_client = AzureOpenAI(
 # FastAPIアプリケーションの作成
 app = FastAPI()
 
+# CORS 設定を環境変数から取得
+allow_origins = os.getenv("CORS_ALLOW_ORIGINS", "").split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=allow_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
